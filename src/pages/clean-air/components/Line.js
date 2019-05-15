@@ -4,6 +4,7 @@ import { ResponsiveLine } from '@nivo/line'
 const commonProperties = {
   margin: { top: 20, right: 20, bottom: 60, left: 80 },
   animate: true,
+  enableSlices: 'x',
 };
 
 export default ({ data = getDefaultData() }) => (
@@ -17,17 +18,17 @@ export default ({ data = getDefaultData() }) => (
     }}
     yScale={{
       type: 'linear',
-      // stacked: boolean('stacked', false),
     }}
     axisBottom={{
       format: '%b %d',
     }}
-    // curve={select('curve', curveOptions, 'step')}
     enableDotLabel={true}
-    // dotSymbol={CustomSymbol}
-    dotSize={16}
-    dotBorderWidth={1}
-    dotBorderColor="inherit:darker(0.3)"
+    pointSize={16}
+    pointBorderWidth={1}
+    pointBorderColor={{
+      from: 'color',
+      modifiers: [['darker', 0.3]],
+    }}
   />
 )
 
