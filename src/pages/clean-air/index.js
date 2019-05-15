@@ -1,11 +1,18 @@
 import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
+import {
+  Spinner,
+  Intent,
+} from "@blueprintjs/core";
 
 import { Pie, Line, Map } from './components';
 
 import api from '../../api';
 import styles from './styles.module.scss';
+
+const dustTypes = ['pm10', 'pm25'];
+const otherTypes = ['temperature', 'humidity'];
 
 export default class App extends React.Component {
   state = {
@@ -20,28 +27,46 @@ export default class App extends React.Component {
       const data = await api.fetchMeasures();
       this.setState({ data });
 
-    } catch {
+    } finally {
       this.setState({ isLoading: false });
     }
   }
 
+  renderWhileLoading = () => {
+    return (
+      <div className={styles.clean_air}>
+        <div className={styles.loading_screen}>
+          <Spinner intent={Intent.WARNING} size={Spinner.SIZE_LARGE} />
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
+
+    if (isLoading) {
+      return this.renderWhileLoading();
+    }
 
     return (
       <div className={styles.clean_air}>
-        <div className={styles.first_screen}>
-          {['pm10', 'pm25'].map(type => (
+        <div className={styles.pie_screen}>
+          {dustTypes.map(type => (
             <Pie key={`pie_${type}`} data={getPieFormat(data, type)} />
           ))}
         </div>
-        <div className={styles.second_screen}>
-          <Line data={getLineFormat(data, 'pm25')} />
+        <div className={styles.line_screen}>
+          {dustTypes.map(type => (
+            <Line key={`dust_${type}`} data={getLineFormat(data, type)} />
+          ))}
         </div>
-        <div className={styles.third_screen}>
-          <Line data={getLineFormat(data, 'pm10')} />
+        <div className={styles.line_screen}>
+          {otherTypes.map(type => (
+            <Line key={`other_${type}`} data={getLineFormat(data, type)} />
+          ))}
         </div>
-        <div className={styles.forth_screen}>
+        <div className={styles.map_screen}>
           <Map data={getMapFormat(data)} />
         </div>
       </div>

@@ -13,7 +13,7 @@ import 'react-leaflet-markercluster/dist/styles.css';
 // })
 
 export default (props) =>
-  <LeafletMap style={{ height: '100vh', width: '100vw' }} center={[46.75778, 23.58301]} zoom={11} maxZoom={18} zoomControl={false}>
+  <LeafletMap style={{ height: '100vh', width: '100vw' }} center={[46.75778, 23.58301]} zoom={11} maxZoom={18}>
     <TileLayer
       attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -31,5 +31,4 @@ export default (props) =>
         </Marker>
       ))}
     </MarkerClusterGroup>
-    <ZoomControl position="topright" />
   </LeafletMap>
