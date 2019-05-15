@@ -13,7 +13,6 @@ const setConfig = (config = {}) => {
   return cfg;
 };
 
-
 class RestHelper {
   constructor(instance) {
     this.instance = instance;
@@ -41,11 +40,13 @@ class RestHelper {
   //   }
 }
 
-function getInstance(type) {
+function getInstance(type, url, headers) {
   switch (type) {
-    case 'backend': {
+    case 'urad': {
       const instance = axios.create({
-        baseURL: getBaseUrl()
+        baseURL: url,
+        timeout: 10 * 1000,
+        headers,
       });
 
       // See more about the Retry pattern: https://docs.microsoft.com/en-us/azure/architecture/patterns/retry
@@ -63,9 +64,10 @@ function getInstance(type) {
 // Here we set the Bearer
 // axios.defaults.headers.common.Authorization = `bearer ${token}`;
 
-function getBaseUrl() {
-  // return 'https://express-api-19.herokuapp.com/api/v1/pulse';
-  return 'http://localhost:8080/api/v1/pulse';
-}
+const headers = {
+  'X-User-id': 'www',
+  'X-User-hash': 'global',
+  'Origin': 'https://www.uradmonitor.com'
+};
 
-export default new RestHelper(getInstance('backend'));
+export const UradService = new RestHelper(getInstance('urad', 'https://data.uradmonitor.com/api/v1/', headers));
