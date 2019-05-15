@@ -43,9 +43,15 @@ class RestHelper {
 function getInstance(type, url, headers) {
   switch (type) {
     case 'urad': {
+      const headers = {
+        'X-User-id': 'www',
+        'X-User-hash': 'global',
+        'Origin': 'https://www.uradmonitor.com'
+      };
+
       const instance = axios.create({
         baseURL: url,
-        timeout: 10 * 1000,
+        timeout: 5 * 1000,
         headers,
       });
 
@@ -64,10 +70,4 @@ function getInstance(type, url, headers) {
 // Here we set the Bearer
 // axios.defaults.headers.common.Authorization = `bearer ${token}`;
 
-const headers = {
-  'X-User-id': 'www',
-  'X-User-hash': 'global',
-  'Origin': 'https://www.uradmonitor.com'
-};
-
-export const UradService = new RestHelper(getInstance('urad', 'https://data.uradmonitor.com/api/v1/', headers));
+export const UradService = new RestHelper(getInstance('urad', 'https://data.uradmonitor.com/api/v1/'));
