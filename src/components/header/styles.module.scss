@@ -1,0 +1,13 @@
+@import '../../globals';
+
+.header {
+    display: flex;
+    justify-content: right;
+
+    padding: 15px 30px;
+    background-color: $grey-color;
+
+    .tree {
+        margin-right: 20px;
+    }
+}
