@@ -21,14 +21,20 @@
         display: flex;
 
         height: 100vh;
-        // background-color: $green1;
         padding: 5vh 5vw;
+        background-color: $blue1;
     }
 
     .map_screen {
         display: flex;
-
         height: 100vh;
+    }
+
+    .map_sunburst {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+
     }
 
 }

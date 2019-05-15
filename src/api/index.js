@@ -12,7 +12,7 @@ class Api {
   }
 }
 
-const isMock = false;
+const isMock = true;
 const inner = isMock ? MockApi : RealApi;
 
 export default new Api(inner);

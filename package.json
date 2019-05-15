@@ -7,6 +7,7 @@
     "@nivo/bar": "^0.57.0",
     "@nivo/line": "^0.57.1",
     "@nivo/pie": "^0.57.0",
+    "@nivo/sunburst": "^0.57.0",
     "axios": "^0.18.0",
     "leaflet": "^1.5.1",
     "leaflet.markercluster": "^1.4.1",

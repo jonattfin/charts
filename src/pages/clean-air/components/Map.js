@@ -1,7 +1,6 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker, ZoomControl, Popup } from "react-leaflet";
+import { Map as LeafletMap, TileLayer, Marker } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import L from 'leaflet'
 
 import 'leaflet/dist/leaflet.css';
 import 'react-leaflet-markercluster/dist/styles.css';

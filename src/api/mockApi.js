@@ -10,11 +10,11 @@ export default class MockApi {
 }
 
 function transform(data) {
-  // const isCorrect = true;;
-  // const isCorrect = ({ country, city }) => _.toLower(country).includes('ro') && _.toLower(city).includes('cluj');
+  // const isCorrect = true;
+  const isCorrect = ({ country, city }) => _.toLower(country) === 'ro';
 
   const result = data
-    // .filter(isCorrect)
+    .filter(isCorrect)
     .map(item => {
       const {
         id, latitude, longitude, city, country, timelast,
@@ -36,7 +36,6 @@ function transform(data) {
       };
     });
   
-  debugger;
   return result;
 }
 

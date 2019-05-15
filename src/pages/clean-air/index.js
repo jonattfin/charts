@@ -6,7 +6,7 @@ import {
   Intent,
 } from "@blueprintjs/core";
 
-import { Pie, Line, Map } from './components';
+import { Pie, Line, Map, Sunburst } from './components';
 
 import api from '../../api';
 import styles from './styles.module.scss';
@@ -51,6 +51,9 @@ export default class App extends React.Component {
 
     return (
       <div className={styles.clean_air}>
+        <div className={styles.map_screen}>
+          <Map data={getMapFormat(data)} />
+        </div>
         <div className={styles.pie_screen}>
           {dustTypes.map(type => (
             <Pie key={`pie_${type}`} data={getPieFormat(data, type)} />
@@ -66,12 +69,47 @@ export default class App extends React.Component {
             <Line key={`other_${type}`} data={getLineFormat(data, type)} />
           ))}
         </div>
-        <div className={styles.map_screen}>
-          <Map data={getMapFormat(data)} />
+        <div className={styles.map_sunburst}>
+          <Sunburst data={getSunburstFormat(data)} />
         </div>
       </div>
     )
   }
+}
+
+function getSunburstFormat(data, country) {
+  const groupedByCity = _.groupBy(data, item => item.city);
+
+  const rootObject = {
+    name: country,
+    children: [],
+  };
+
+  _.forEach(groupedByCity, (values, key) => {
+    const parents = [];
+    dustTypes.forEach(type => {
+      const children = [];
+
+      const limits = getLimits(type);
+      for (let i = 0; i < limits.length; i++) {
+        const element = limits[i];
+        const nextElementValue = limits[i + 1] ? limits[i + 1].val : Number.POSITIVE_INFINITY;
+
+        const numberOfElements = values.filter(d => d[`avg_${type}`] > element.val && d[`avg_${type}`] < nextElementValue).length;
+        children.push({ name: element.label, color: element.color, loc: numberOfElements });
+      }
+
+      parents.push({ name: type, children });
+    })
+
+    rootObject.children.push({
+      name: key,
+      children: parents,
+    });
+  });
+
+  debugger;
+  return rootObject;
 }
 
 function getMapFormat(data) {
@@ -113,7 +151,6 @@ function getPieFormat(data, type) {
   for (let i = 0; i < limits.length; i++) {
     const element = limits[i];
     const nextElementValue = limits[i + 1] ? limits[i + 1].val : Number.POSITIVE_INFINITY;
-
 
     result.push({
       value: data.filter(d => d[`avg_${type}`] > element.val && d[`avg_${type}`] < nextElementValue).length,
