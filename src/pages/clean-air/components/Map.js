@@ -11,8 +11,10 @@ import 'react-leaflet-markercluster/dist/styles.css';
 //   iconAnchor: [20, 20],
 // })
 
+const center = [45.844,24.620];
+
 export default (props) =>
-  <LeafletMap style={{ height: '100vh', width: '100vw' }} center={[46.75778, 23.58301]} zoom={11} maxZoom={18}>
+  <LeafletMap style={{ height: '100vh', width: '100vw' }} center={center} zoom={7} maxZoom={18}>
     <TileLayer
       attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
