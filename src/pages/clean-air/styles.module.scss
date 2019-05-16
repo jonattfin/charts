@@ -30,11 +30,16 @@
         height: 100vh;
     }
 
+    .heatmap_screen {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
     .map_sunburst {
         display: flex;
         height: 100vh;
         background-color: $blue1;
-
     }
 
 }

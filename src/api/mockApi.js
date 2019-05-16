@@ -4,7 +4,7 @@ import data from './data';
 import { withDelay } from './tools';
 
 export default class MockApi {
-  static async fetchMeasures() {
+  static fetchMeasures() {
     return withDelay(transform(data));
   }
 }

@@ -1,17 +1,17 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker } from "react-leaflet";
+import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import L from 'leaflet'
 
 import 'leaflet/dist/leaflet.css';
 import 'react-leaflet-markercluster/dist/styles.css';
 
-// export const pointerIcon = new L.Icon({
-//   iconUrl: require('../../../assets/broadcast-tower-solid.svg'),
-//   iconRetinaUrl: require('../../../assets/broadcast-tower-solid.svg'),
-//   iconAnchor: [20, 20],
-// })
+export const pointerIcon = new L.Icon({
+  iconUrl: require('./images/map-marker-alt-solid.svg'),
+  iconAnchor: [20, 20],
+});
 
-const center = [45.844,24.620];
+const center = [45.844, 24.620];
 
 export default (props) =>
   <LeafletMap style={{ height: '100vh', width: '100vw' }} center={center} zoom={7} maxZoom={18}>
@@ -23,12 +23,9 @@ export default (props) =>
       {props.data.map((item, index) => (
         <Marker
           key={index}
-          position={[item.latitude, item.longitude]}>
-          {
-            /*icon={pointerIcon}>
-            <Popup>{`name: ${item.name}, status: ${item.status}`}</Popup> 
-            */
-          }
+          position={[item.latitude, item.longitude]}
+          icon={pointerIcon}>
+          <Popup>{`name: ${item.name}, status: ${item.status}`}</Popup>
         </Marker>
       ))}
     </MarkerClusterGroup>

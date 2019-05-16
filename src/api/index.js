@@ -7,7 +7,7 @@ class Api {
     this.inner = inner;
   }
 
-  async fetchMeasures() {
+  fetchMeasures() {
     return this.inner.fetchMeasures();
   }
 }
