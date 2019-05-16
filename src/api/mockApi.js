@@ -29,8 +29,8 @@ function transform(data) {
         country,
         timelast,
         // measurements
-        avg_pm25,
-        avg_pm10,
+        avg_pm25: parseInt(avg_pm25),
+        avg_pm10: parseInt(avg_pm10),
         avg_temperature,
         avg_humidity
       };
