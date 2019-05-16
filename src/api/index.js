@@ -8,7 +8,7 @@ class Api {
   }
 
   fetchMeasures() {
-    return this.inner.fetchMeasures();
+    return this.inner.fetchMeasures()
   }
 }
 

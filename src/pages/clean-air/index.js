@@ -49,9 +49,9 @@ export default class App extends React.Component {
     return (
       <div className={styles.clean_air}>
         <div className={styles.map_screen}>
-          <Map data={adapters.toMapFormat(data)} />
+          {/* <Map data={adapters.toMapFormat(data)} /> */}
         </div>
-        <div className={styles.pie_screen}>
+        {/* div className={styles.pie_screen}>
           {adapters.dustTypes.map(type => (
             <Pie key={`pie_${type}`} data={adapters.toPieFormat(data, type)} />
           ))}
@@ -68,10 +68,10 @@ export default class App extends React.Component {
         </div>
         {/* <div className={styles.heatmap_screen}>
           <HeatMap />
-        </div> */}
+        </div> 
         <div className={styles.map_sunburst}>
           <Sunburst data={adapters.toSunburstFormat(data)} />
-        </div>
+        </div> */}
       </div>
     )
   }

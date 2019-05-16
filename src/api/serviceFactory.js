@@ -40,34 +40,34 @@ class RestHelper {
   //   }
 }
 
-function getInstance(type, url, headers) {
+function getInstance(type) {
+
+  let { url, headers = {} } = {};
+
   switch (type) {
     case 'urad': {
-      const headers = {
+      url = 'https://data.uradmonitor.com/api/v1/';
+      headers = {
         'X-User-id': 'www',
         'X-User-hash': 'global',
         'Origin': 'https://www.uradmonitor.com'
       };
-
-      const instance = axios.create({
-        baseURL: url,
-        timeout: 5 * 1000,
-        headers,
-      });
-
-      // See more about the Retry pattern: https://docs.microsoft.com/en-us/azure/architecture/patterns/retry
-      //   axiosRetry(instance, 3);
-
-      return instance;
+      break;
+    }
+    case 'pulse': {
+      url = 'https://cluj-napoca.pulse.eco/rest';
+      break;
     }
     default:
       throw new Error(`The instance of type ${type} is not supported!`);
   }
+
+  return axios.create({
+    baseURL: url,
+    timeout: 5 * 1000,
+    headers,
+  });
 }
 
-// const token = SessionHandler.getToken() || URLHelper.tryGetQueryParameter(Constants.QueryParam.ID_TOKEN);
-
-// Here we set the Bearer
-// axios.defaults.headers.common.Authorization = `bearer ${token}`;
-
-export const UradService = new RestHelper(getInstance('urad', 'https://data.uradmonitor.com/api/v1/'));
+export const UradService = new RestHelper(getInstance('urad'));
+export const PulseService = new RestHelper(getInstance('pulse'));
