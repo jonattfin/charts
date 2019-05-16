@@ -60,6 +60,7 @@ function toLineFormat(data, type) {
     }
     results.push(obj);
   });
+
   return results;
 }
 

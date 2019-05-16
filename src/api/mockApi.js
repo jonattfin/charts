@@ -18,12 +18,33 @@ export default class MockApi {
   }
 }
 
-function transformUradData(UradData) {
-  return []; // TODO
+const DATE_FORMAT = 'YYYY-MM-DD';
+
+function transformUradData(data) {
+  return data
+    .filter(item => item.status !== null && item.country === 'RO')
+    .map(item => {
+      const {
+        id, city, country, avg_pm10, avg_pm25, latitude, longitude,
+        avg_temperature, avg_humidity, timelast
+      } = item;
+
+      return {
+        city,
+        country,
+        day: moment.unix(timelast).format(DATE_FORMAT),
+        sensorId: id,
+        position: [latitude, longitude],
+        pm10: _.parseInt(avg_pm10) || null,
+        pm25: _.parseInt(avg_pm25) || null,
+        temperature: _.parseInt(avg_temperature) || null,
+        humidity: _.parseInt(avg_humidity) || null,
+      };
+    })
 }
 
 function transformPulseData(data) {
-  const groupedByDay = _.groupBy(data, item => moment(item.stamp).format('YYYY-MM-DD'));
+  const groupedByDay = _.groupBy(data, item => moment(item.stamp).format(DATE_FORMAT));
 
   const results = [];
   _.forEach(groupedByDay, (dayValues, day) => {
@@ -38,7 +59,7 @@ function transformPulseData(data) {
           .filter(item => item.type === type)
           .map(item => _.toNumber(item.value));
 
-        obj[type] = Math.trunc(values.reduce((prev, current) => prev + current, 0) / values.length);
+        obj[type] = Math.trunc(values.reduce((prev, current) => prev + current, 0) / values.length) || null;
       });
 
       results.push({

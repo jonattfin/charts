@@ -58,12 +58,12 @@ export default class App extends React.Component {
         </div>
         <div className={styles.line_screen}>
           {adapters.dustTypes.map(type => (
-            <Line key={`dust_${type}`} data={adapters.toLineFormat(data, type)} />
+            <Line key={`dust_${type}`} data={adapters.toLineFormat(data, type).filter(item => item[type] !== null)} />
           ))}
         </div>
         <div className={styles.line_screen}>
           {adapters.otherTypes.map(type => (
-            <Line key={`other_${type}`} data={adapters.toLineFormat(data, type)} />
+            <Line key={`other_${type}`} data={adapters.toLineFormat(data, type).filter(item => item[type] !== null)} />
           ))}
         </div>
         <div className={styles.map_sunburst}>
