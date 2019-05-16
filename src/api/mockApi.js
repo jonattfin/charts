@@ -38,10 +38,12 @@ function transformPulseData(data) {
           .filter(item => item.type === type)
           .map(item => _.toNumber(item.value));
 
-        obj[type] = values.reduce((prev, current) => prev + current, 0) / values.length;
+        obj[type] = Math.trunc(values.reduce((prev, current) => prev + current, 0) / values.length);
       });
 
       results.push({
+        city: 'Cluj-Napoca', // TODO
+        country: 'Romania',
         day,
         sensorId,
         position: _.first(sensorValues).position.split(','),
@@ -51,7 +53,6 @@ function transformPulseData(data) {
     });
   });
 
-  debugger;
   return results;
 }
 

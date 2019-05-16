@@ -22,9 +22,9 @@ export default (props) => (
       {props.data.map((item, index) => (
         <Marker
           key={index}
-          position={[item.latitude, item.longitude]}
+          position={item.position}
           icon={getIcon(item)}>
-          <Popup>{`id: ${item.id}, pm25: ${item.avg_pm25}, pm10: ${item.avg_pm10}`}</Popup>
+          <Popup>{`sensorId: ${item.sensorId}, pm25: ${item.pm25}, pm10: ${item.pm10}`}</Popup>
         </Marker>
       ))}
     </MarkerClusterGroup>
@@ -65,7 +65,7 @@ function getColor(item, type) {
     const element = limits[i];
     const nextElementValue = limits[i + 1] ? limits[i + 1].val : Number.POSITIVE_INFINITY;
 
-    const itemValue = item[`avg_${type}`];
+    const itemValue = item[type];
     if (element.val <= itemValue && itemValue < nextElementValue) {
       return element.color;
     }
