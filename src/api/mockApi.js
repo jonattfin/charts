@@ -1,79 +1,22 @@
 
-import _ from 'lodash';
-import moment from 'moment';
-
 import { UradData, PulseData } from './data';
 import { withDelay } from './tools';
-
-const TYPES = ['pm10', 'pm25', 'temperature', 'humidity'];
+import { transformUradData, transformPulseData } from './transformers';
 
 export default class MockApi {
   static async fetchMeasures() {
     const data = await Promise.all([
-      withDelay(transformUradData(UradData)),
-      withDelay(transformPulseData(PulseData)),
+      withDelay(UradData),
+      withDelay(PulseData)
     ]);
 
-    return _.concat(...data);
+    const transformers = [transformUradData, transformPulseData];
+
+    const results = [];
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      results.push(...transformers[index](element));
+    }
+    return results;
   }
 }
-
-const DATE_FORMAT = 'YYYY-MM-DD';
-
-function transformUradData(data) {
-  return data
-    .filter(item => item.status !== null && item.country === 'RO')
-    .map(item => {
-      const {
-        id, city, country, avg_pm10, avg_pm25, latitude, longitude,
-        avg_temperature, avg_humidity, timelast
-      } = item;
-
-      return {
-        city,
-        country,
-        day: moment.unix(timelast).format(DATE_FORMAT),
-        sensorId: id,
-        position: [latitude, longitude],
-        pm10: _.parseInt(avg_pm10) || null,
-        pm25: _.parseInt(avg_pm25) || null,
-        temperature: _.parseInt(avg_temperature) || null,
-        humidity: _.parseInt(avg_humidity) || null,
-      };
-    })
-}
-
-function transformPulseData(data) {
-  const groupedByDay = _.groupBy(data, item => moment(item.stamp).format(DATE_FORMAT));
-
-  const results = [];
-  _.forEach(groupedByDay, (dayValues, day) => {
-
-    const groupedBySensorId = _.groupBy(dayValues, item => item.sensorId);
-
-    _.forEach(groupedBySensorId, (sensorValues, sensorId) => {
-
-      const obj = {};
-      TYPES.forEach(type => {
-        const values = sensorValues
-          .filter(item => item.type === type)
-          .map(item => _.toNumber(item.value));
-
-        obj[type] = Math.trunc(values.reduce((prev, current) => prev + current, 0) / values.length) || null;
-      });
-
-      results.push({
-        city: 'Cluj-Napoca', // TODO
-        country: 'Romania',
-        day,
-        sensorId,
-        position: _.first(sensorValues).position.split(','),
-        ...obj,
-      });
-
-    });
-  });
-
-  return results;
-}
-

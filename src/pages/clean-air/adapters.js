@@ -43,8 +43,8 @@ function toSunburstFormat(data) {
 function toMapFormat(data) {
   return data
     .map(item => {
-      const { sensorId, position, pm25, pm10 } = item;
-      return { sensorId, position, pm25, pm10 }
+      const { sensorId, position, pm25, pm10, source } = item;
+      return { sensorId, position, pm25, pm10, source }
     });
 
 }

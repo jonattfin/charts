@@ -1,7 +1,21 @@
-import { UradService } from './serviceFactory';
+import { UradService, PulseService } from './serviceFactory';
+
+import { transformUradData, transformPulseData } from './transformers';
 
 export default class RealApi {
-  static fetchMeasures() {
-    return UradService.get(`devices`);
+  static async fetchMeasures() {
+    const data = await Promise.all([
+      UradService.get(`devices`),
+      PulseService.get('data24h')
+    ]);
+
+    const transformers = [transformUradData, transformPulseData];
+
+    const results = [];
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      results.push(...transformers[index](element));
+    }
+    return results;
   }
 }

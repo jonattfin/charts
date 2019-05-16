@@ -44,10 +44,13 @@ function getIcon(item) {
     transform: rotate(45deg);
   `;
 
+  const source = item.source === 'urad' ? 'U' : 'P'; // TODO
+
   const html = `
-    <div>
-      <span style="${markerHtmlStyles(getColor(item, 'pm25'), Colors.BLUE5)}" />
-      <span style="${markerHtmlStyles(getColor(item, 'pm10'), Colors.GOLD5)}" />
+    <div/>
+      ${source}
+      <span style="${markerHtmlStyles(getColor(item, 'pm25'), Colors.BLUE5)}"/>
+      <span style="${markerHtmlStyles(getColor(item, 'pm10'), Colors.GOLD5)}"/>
     </div>
   `;
 
