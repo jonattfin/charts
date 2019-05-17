@@ -1,18 +1,9 @@
 
-import MockApi from './mockApi';
-import RealApi from './realApi';
+import { HerokuService } from './serviceFactory';
 
-class Api {
-  constructor(inner) {
-    this.inner = inner;
-  }
-
-  fetchMeasures() {
-    return this.inner.fetchMeasures();
+export default class Api {
+  static async fetchMeasures() {
+    const response = await HerokuService.get('/measures/data1day');
+    return response.measures;
   }
 }
-
-const isMock = true;
-const inner = isMock ? MockApi : RealApi;
-
-export default new Api(inner);
