@@ -41,7 +41,7 @@ function toSunburstFormat(data) {
 }
 
 function toMapFormat(data) {
-  return data
+  return _.uniqBy(data, (item) => item.sensorId)
     .map(item => {
       const { sensorId, position, pm25, pm10, source } = item;
       return { sensorId, position, pm25, pm10, source }
