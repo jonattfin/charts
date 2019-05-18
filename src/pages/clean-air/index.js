@@ -5,10 +5,10 @@ import {
   Intent,
 } from "@blueprintjs/core";
 
-import { Pie, Line, Map, Sunburst } from './components';
+import { Pie, Line, Map, Sunburst, Bar } from './components';
 
 import api from '../../api';
-import adapters from './adapters';
+import * as adapters from './adapters';
 import styles from './styles.module.scss';
 
 export default class App extends React.Component {
@@ -65,6 +65,12 @@ export default class App extends React.Component {
           {adapters.otherTypes.map(type => (
             <Line key={`other_${type}`} data={adapters.toLineFormat(data, type).filter(item => item[type] !== null)} />
           ))}
+        </div>
+        {/*  <div className={styles.map_bump}>
+          <Stream data={adapters.toStreamFormat(data)}/>
+        </div> */}
+        <div className={styles.map_bar}>
+          <Bar data={adapters.toBarFormat(data)} />
         </div>
         <div className={styles.map_sunburst}>
           <Sunburst data={adapters.toSunburstFormat(data)} />

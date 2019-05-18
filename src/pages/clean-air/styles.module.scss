@@ -22,7 +22,7 @@
 
         height: 100vh;
         padding: 5vh 5vw;
-        background-color: $blue1;
+        background-color: $white;
     }
 
     .map_screen {
@@ -37,6 +37,18 @@
     }
 
     .map_sunburst {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
+    .map_bump {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
+    .map_bar {
         display: flex;
         height: 100vh;
         background-color: $blue1;

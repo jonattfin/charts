@@ -10,6 +10,7 @@ export default ({ data = getDefaultData() }) =>
       "bottom": 80,
       "left": 80
     }}
+    sortByValue
     innerRadius={0.5}
     padAngle={0.7}
     cornerRadius={3}

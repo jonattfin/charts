@@ -11,7 +11,8 @@ export default ({ data = getDefaultData() }) => (
     borderWidth={1}
     borderColor="white"
     colors={{ scheme: 'nivo' }}
-    childColor={{ from: 'color' }}
+    // childColor={{ from: 'color' }}
+    childColor="noinherit"
     animate={true}
     motionStiffness={90}
     motionDamping={15}

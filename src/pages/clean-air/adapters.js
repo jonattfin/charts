@@ -3,10 +3,36 @@ import _ from 'lodash';
 
 import { getLimits } from './limits';
 
-const dustTypes = ['pm10', 'pm25'];
-const otherTypes = ['temperature', 'humidity'];
+export const dustTypes = ['pm10', 'pm25'];
+export const otherTypes = ['temperature', 'humidity'];
 
-function toSunburstFormat(data) {
+export function toBumpFormat(data) {
+}
+
+export function toStreamFormat(data) {
+
+}
+
+export function toBarFormat(data) {
+  const sortedData = _.take(_.orderBy(data.filter(item => item.pm10 !== null), ['pm10'], ['desc']), 10);
+
+  const keys = ['pm10', 'pm25', 'temperature', 'humidity'];
+  const items = _.uniqBy(sortedData, item => item.city).map(item => {
+    const { pm10, pm25, temperature, humidity, city } = item;
+
+    return {
+      city,
+      pm10,
+      pm25,
+      temperature,
+      humidity,
+    }
+  });
+
+  return { keys, items };
+}
+
+export function toSunburstFormat(data) {
   const groupedByCity = _.groupBy(data, item => item.city);
 
   const rootObject = {
@@ -40,7 +66,7 @@ function toSunburstFormat(data) {
   return rootObject;
 }
 
-function toMapFormat(data) {
+export function toMapFormat(data) {
   return _.uniqBy(data, (item) => item.sensorId)
     .map(item => {
       const { sensorId, position, pm25, pm10, source } = item;
@@ -49,7 +75,7 @@ function toMapFormat(data) {
 
 }
 
-function toLineFormat(data, type) {
+export function toLineFormat(data, type) {
   const groupedBySensorId = _.groupBy(data, item => item.sensorId);
 
   const results = [];
@@ -64,7 +90,7 @@ function toLineFormat(data, type) {
   return results;
 }
 
-function toPieFormat(data, type) {
+export function toPieFormat(data, type) {
   const result = [];
 
   const limits = getLimits(type);
@@ -80,13 +106,4 @@ function toPieFormat(data, type) {
   }
 
   return result;
-}
-
-export default {
-  dustTypes,
-  otherTypes,
-  toSunburstFormat,
-  toMapFormat,
-  toLineFormat,
-  toPieFormat,
 }

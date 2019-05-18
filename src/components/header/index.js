@@ -17,7 +17,7 @@ const menu = createMenu();
 export default ({ model = ({ payload: {} }), }) => {
   return (
     <div className={styles.header}>
-      <Popover content={menu} position={Position.BOTTOM_LEFT}>
+      <Popover content={menu} position={Position.LEFT}>
         <Button icon="menu" />
       </Popover>
     </div>
