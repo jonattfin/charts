@@ -21,7 +21,7 @@ export default class App extends React.Component {
     try {
       this.setState({ isLoading: true });
 
-      const data = await api.getLastDay();
+      const data = await api.getLastWeek();
       this.setState({ data });
 
     } finally {

@@ -14,29 +14,12 @@ export function toStreamFormat(data) {
 }
 
 export function toBarFormat(data) {
-  const sortedData = _.take(_.orderBy(data.filter(item => item.pm10 !== null), ['pm10'], ['desc']), 10);
-
-  const groupedBySensorId = _.groupBy(sortedData, item => item.sensorId);
-
-  const items = [];
-  _.forEach(groupedBySensorId, (values, key) => {
-    const newValues = values.map((item, index) => {
-      const { pm10, pm25, temperature, humidity, city } = item;
-      return {
-        city: `${city} ${key} ${index}`,
-        pm10,
-        pm25,
-        temperature,
-        humidity,
-      }
-    });
-
-    items.push(...newValues);
-  });
+  const filtered = _.take(_.orderBy(data, ['pm10'], ['desc']), 10)
+    .map(({ city, pm10, pm25, temperature, humidity }, index) => ({ pm10, pm25, humidity, temperature, city: `${city} ${index}` }));
 
   return {
     keys: ['pm10', 'pm25', 'temperature', 'humidity'],
-    items,
+    items: filtered,
   };
 }
 
