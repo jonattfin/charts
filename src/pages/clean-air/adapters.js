@@ -16,20 +16,28 @@ export function toStreamFormat(data) {
 export function toBarFormat(data) {
   const sortedData = _.take(_.orderBy(data.filter(item => item.pm10 !== null), ['pm10'], ['desc']), 10);
 
-  const keys = ['pm10', 'pm25', 'temperature', 'humidity'];
-  const items = _.uniqBy(sortedData, item => item.city).map(item => {
-    const { pm10, pm25, temperature, humidity, city } = item;
+  const groupedBySensorId = _.groupBy(sortedData, item => item.sensorId);
 
-    return {
-      city,
-      pm10,
-      pm25,
-      temperature,
-      humidity,
-    }
+  const items = [];
+  _.forEach(groupedBySensorId, (values, key) => {
+    const newValues = values.map((item, index) => {
+      const { pm10, pm25, temperature, humidity, city } = item;
+      return {
+        city: `${city} ${key} ${index}`,
+        pm10,
+        pm25,
+        temperature,
+        humidity,
+      }
+    });
+
+    items.push(...newValues);
   });
 
-  return { keys, items };
+  return {
+    keys: ['pm10', 'pm25', 'temperature', 'humidity'],
+    items,
+  };
 }
 
 export function toSunburstFormat(data) {

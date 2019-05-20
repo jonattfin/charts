@@ -81,7 +81,6 @@ function getInstance(type) {
 
   return axios.create({
     baseURL: url,
-    timeout: 10 * 1000,
     headers,
     maxContentLength
   });
