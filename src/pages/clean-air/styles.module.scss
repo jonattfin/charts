@@ -10,6 +10,29 @@
         background-color: $blue1;
     }
 
+    .submenu_screen {
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      height: 4vh;
+      background-color: $dark-gray1;
+
+      div {
+        padding: 1vh 2vw;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .active {
+        background-color: $gold5;
+      }
+
+      .inactive {
+        background-color: $gold1;
+        cursor: pointer;
+      }
+    }
+
     .pie_screen {
         display: flex;
 

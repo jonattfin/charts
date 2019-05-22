@@ -25,21 +25,15 @@ export default ({ model = ({ payload: {} }), }) => {
 };
 
 function createMenu() {
-  const pages = [
-    { url: '/', text: 'Home', icon: "home", },
-    { url: '/clean-air', text: 'Clean Air', icon: "build", },
-  ];
-
   const onClick = (history, url) => () => history.push(url);
 
   return (
-    <Menu>
-      <Route render={({ history }) => (
-        <React.Fragment>
-          {pages.map(({ icon, text, url }, index) => <MenuItem key={`menuItem_${index}`} icon={icon} text={text} onClick={onClick(history, url)} />)}
-        </React.Fragment>
-      )}>
-      </Route>
-    </Menu>
+    <Route render={({ history }) => (
+      <Menu>
+        <MenuItem icon={'home'} text={'Home'} onClick={onClick(history, '/')} />
+        <MenuItem icon={'build'} text={'Clean Air'} onClick={onClick(history, '/clean-air')} />
+      </Menu>
+    )}>
+    </Route>
   );
 }
