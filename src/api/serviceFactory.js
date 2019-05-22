@@ -56,8 +56,8 @@ function getInstance(type) {
 
   switch (type) {
     case 'heroku': {
-      url = 'http://localhost:8080/api/v1';
-      // url = 'https://express-api-19.herokuapp.com/api/v1';
+      // url = 'http://localhost:8080/api/v1';
+      url = 'https://express-api-19.herokuapp.com/api/v1';
       break;
     }
     // case 'urad': {
