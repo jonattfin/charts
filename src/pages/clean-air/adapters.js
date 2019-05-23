@@ -6,23 +6,6 @@ import { getLimits } from './limits';
 export const dustTypes = ['pm10', 'pm25'];
 export const otherTypes = ['temperature', 'humidity'];
 
-export function toBumpFormat(data) {
-}
-
-export function toStreamFormat(data) {
-
-}
-
-export function toBarFormat(data) {
-  const filtered = _.take(_.orderBy(data, ['pm10'], ['desc']), 10)
-    .map(({ city, pm10, pm25, temperature, humidity }, index) => ({ pm10, pm25, humidity, temperature, city: `${city} ${index}` }));
-
-  return {
-    keys: ['pm10', 'pm25', 'temperature', 'humidity'],
-    items: filtered,
-  };
-}
-
 export function toSunburstFormat(data) {
   const groupedByCity = _.groupBy(data, item => item.city);
 
@@ -66,19 +49,42 @@ export function toMapFormat(data) {
 
 }
 
-export function toLineFormat(data, type) {
+export function toLineFormat(data, type, legend) {
   const groupedBySensorId = _.groupBy(data, item => item.sensorId);
 
-  const results = [];
+  const limits = getLimits(type);
+  const useLogScale = type === 'pm10' || type === 'pm25';
+
+  const lineObj = {
+    axisLeft: {
+      tickValues: limits.map(({ val }) => val),
+      legend,
+    },
+    axisBottom: {
+      legend: 'hours',
+    },
+    useLogScale
+  }
+
+  const results = []
   _.forEach(groupedBySensorId, (values, key) => {
+    let newData = values.map(item => ({ x: item.time, y: item[type] }));
+
+    // when using logarithmic scale the values have to be greater than 0
+    if (useLogScale) {
+      newData = newData.filter(item => item.y > 0);
+    }
+
     const obj = {
       id: key,
-      data: values.map(item => ({ x: item.day, y: item[type] }))
-    }
-    results.push(obj);
-  });
+      data: newData,
+      ...lineObj
+    };
 
-  return results;
+    results.push(obj);
+  })
+
+  return { data: results, ...lineObj };
 }
 
 export function toPieFormat(data, type) {

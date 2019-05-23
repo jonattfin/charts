@@ -5,7 +5,7 @@ import {
   Intent,
 } from "@blueprintjs/core";
 
-import { Pie, Line, Map, Sunburst, Bar } from './components';
+import { Pie, Line, Map } from './components';
 
 import api from '../../api';
 import * as adapters from './adapters';
@@ -79,31 +79,23 @@ export default class App extends React.Component {
         <div className={styles.map_screen}>
           <Map data={adapters.toMapFormat(data)} />
         </div>
+        {
+          adapters.dustTypes.map(type => (
+            <div key={`dust_${type}`} className={styles.line_screen}>
+              <Line {...adapters.toLineFormat(data, type, `${type} µg/m3`)} />
+            </div>
+          ))}
+        <div className={styles.line_screen}>
+          {adapters.otherTypes.map(type => (
+            <Line key={`other_${type}`} {...adapters.toLineFormat(data, type, type)} />
+          ))}
+        </div>
         <div className={styles.pie_screen}>
           {adapters.dustTypes.map(type => (
             <Pie key={`pie_${type}`} data={adapters.toPieFormat(data, type)} />
           ))}
         </div>
-        <div className={styles.line_screen}>
-          {adapters.dustTypes.map(type => (
-            <Line key={`dust_${type}`} data={adapters.toLineFormat(data, type).filter(item => item[type] !== null)} />
-          ))}
-        </div>
-        <div className={styles.line_screen}>
-          {adapters.otherTypes.map(type => (
-            <Line key={`other_${type}`} data={adapters.toLineFormat(data, type).filter(item => item[type] !== null)} />
-          ))}
-        </div>
-        {/*  <div className={styles.map_bump}>
-          <Stream data={adapters.toStreamFormat(data)}/>
-        </div> */}
-        <div className={styles.map_bar}>
-          <Bar data={adapters.toBarFormat(data)} />
-        </div>
-        <div className={styles.map_sunburst}>
-          <Sunburst data={adapters.toSunburstFormat(data)} />
-        </div>
-      </div>
+      </div >
     )
   }
 }
