@@ -56,23 +56,10 @@ function getInstance(type) {
 
   switch (type) {
     case 'heroku': {
-      // url = 'http://localhost:8080/api/v1';
-      url = 'https://express-api-19.herokuapp.com/api/v1';
+      url = 'http://localhost:8080/api/v1'; // DEV
+      // url = 'https://express-api-19.herokuapp.com/api/v1'; // PROD
       break;
     }
-    // case 'urad': {
-    //   url = 'https://data.uradmonitor.com/api/v1/';
-    //   headers = {
-    //     'X-User-id': 'www',
-    //     'X-User-hash': 'global',
-    //     'Origin': 'https://www.uradmonitor.com'
-    //   };
-    //   break;
-    // }
-    // case 'pulse': {
-    //   url = 'https://cluj-napoca.pulse.eco/rest';
-    //   break;
-    // }
     default:
       throw new Error(`The instance of type ${type} is not supported!`);
   }
@@ -87,4 +74,3 @@ function getInstance(type) {
 }
 
 export const HerokuService = new RestHelper(getInstance('heroku'));
-// export const PulseService = new RestHelper(getInstance('pulse'));
