@@ -1,9 +1,98 @@
 @import "~@blueprintjs/core/lib/scss/variables";
 
-.geo_screen {
-  // display: flex;
+.clean_air {
+    .loading_screen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-  // height: 100vh;
-  // width: 100vw;
-  // background-color: $blue1;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
+    .submenu_screen {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        height: 4vh;
+        background-color: $dark-gray1;
+
+        div {
+            padding: 1vh 2vw;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .active {
+            background-color: $gold5;
+        }
+
+        .inactive {
+            background-color: $gold1;
+            cursor: pointer;
+        }
+    }
+
+    .pie_screen {
+        display: flex;
+
+        height: 100vh;
+        background-color: $blue1;
+        border-bottom: 1px solid $gray1;
+    }
+
+    .line_screen {
+        display: flex;
+
+        height: 100vh;
+        padding: 2vh 1vw;
+        background-color: $white;
+        border-bottom: 1px solid $gray1;
+    }
+
+    .map_screen {
+        display: flex;
+        height: 100vh;
+        border-bottom: 1px solid $gray1;
+    }
+
+    .heatmap_screen {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
+    .bar_screen {
+        display: flex;
+        height: 100vh;
+        background-color: $turquoise1;
+        border-bottom: 1px solid $gray1;
+    }
+
+    .sunburst_screen {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+        border-bottom: 1px solid $gray1;
+    }
+
+    .bump_screen {
+        display: flex;
+        width: 1000px;
+        height: 1000px;
+        background-color: $blue1;
+    }
+
+    .map_bar {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
+    .stream_screen {
+        display: flex;
+        height: 100vh;
+        background-color: $blue1;
+    }
+
 }

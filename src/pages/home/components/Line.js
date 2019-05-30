@@ -7,10 +7,10 @@ const commonProperties = {
   enableSlices: 'x',
 };
 
-export default ({ data, axisLeft, axisBottom, useLogScale = false }) => {
+export default ({ data, axisLeft, axisBottom, useLogScale = false, skipLogScale = false }) => {
 
   let optionalParams = {};
-  if (useLogScale) {
+  if (useLogScale && !skipLogScale) {
     optionalParams = {
       yScale: {
         type: 'log',
@@ -19,6 +19,8 @@ export default ({ data, axisLeft, axisBottom, useLogScale = false }) => {
       }
     }
   }
+
+  const offset = 40;
 
   return (
     <ResponsiveLine
@@ -31,12 +33,12 @@ export default ({ data, axisLeft, axisBottom, useLogScale = false }) => {
       }}
       axisLeft={{
         ...axisLeft,
-        legendOffset: -12,
+        legendOffset: -offset,
       }}
       {...optionalParams}
       axisBottom={{
         ...axisBottom,
-        legendOffset: 12,
+        legendOffset: offset,
       }}
     />
   );

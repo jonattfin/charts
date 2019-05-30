@@ -68,7 +68,10 @@ export function toLineFormat(data, type, legend) {
 
   const results = []
   _.forEach(groupedBySensorId, (values, key) => {
-    let newData = values.map(item => ({ x: item.time, y: item[type] }));
+
+    let newData = values
+      .filter(item => _.isNumber(item[type]))
+      .map(item => ({ x: item.time, y: item[type] }));
 
     // when using logarithmic scale the values have to be greater than 0
     if (useLogScale) {
@@ -103,4 +106,29 @@ export function toPieFormat(data, type) {
   }
 
   return result;
+}
+
+export function toBarFormat(data) {
+  const keys = [...dustTypes, ...otherTypes];
+  const items = getData();
+
+  return { keys, items };
+
+  function getData() {
+    const filteredData = _.take(_.orderBy(data, ['pm10'], ['desc']), 15);
+
+    return filteredData.map((item) => {
+
+      const obj = {
+        sensorId: `${_.truncate(item.sensorId, { length: 10 })} / ${item.time}`,
+      };
+
+      keys.forEach(key => {
+        obj[key] = item[key];
+      })
+
+      return obj;
+    })
+  }
+
 }

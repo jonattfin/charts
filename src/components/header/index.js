@@ -31,7 +31,7 @@ function createMenu() {
     <Route render={({ history }) => (
       <Menu>
         <MenuItem icon={'home'} text={'Home'} onClick={onClick(history, '/')} />
-        <MenuItem icon={'build'} text={'Clean Air'} onClick={onClick(history, '/clean-air')} />
+        {/* <MenuItem icon={'build'} text={'Clean Air'} onClick={onClick(history, '/clean-air')} /> */}
       </Menu>
     )}>
     </Route>
