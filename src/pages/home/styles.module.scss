@@ -73,14 +73,6 @@
         display: flex;
         height: 100vh;
         background-color: $blue1;
-        border-bottom: 1px solid $gray1;
-    }
-
-    .bump_screen {
-        display: flex;
-        width: 1000px;
-        height: 1000px;
-        background-color: $blue1;
     }
 
     .map_bar {
@@ -89,10 +81,9 @@
         background-color: $blue1;
     }
 
-    .stream_screen {
+    .heatmap_screen {
         display: flex;
         height: 100vh;
-        background-color: $blue1;
+        border-bottom: 1px solid $gray1;
     }
-
 }

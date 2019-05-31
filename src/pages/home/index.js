@@ -5,7 +5,7 @@ import {
   Intent,
 } from "@blueprintjs/core";
 
-import { Pie, Line, Map, Bar, Sunburst } from './components';
+import { Pie, Line, Map, Bar, Sunburst, HeatMap } from './components';
 
 import api from '../../api';
 import * as adapters from './adapters';
@@ -93,6 +93,11 @@ export default class App extends React.Component {
         </div>
         <div key={`dust_bar`} className={styles.bar_screen}>
           <Bar data={adapters.toBarFormat(data)}></Bar>
+        </div>
+        <div className={styles.heatmap_screen}>
+          {adapters.dustTypes.map(type => (
+            <HeatMap data={adapters.toHeatmapFormat(data, type)} />
+          ))}
         </div>
         <div className={styles.pie_screen}>
           {adapters.dustTypes.map(type => (

@@ -130,5 +130,41 @@ export function toBarFormat(data) {
       return obj;
     })
   }
+}
 
+export function toHeatmapFormat(data, type) {
+  const keys = _.uniq(data.map(item => truncateSensor(item.sensorId)));
+
+  const groupedByTime = _.groupBy(data, item => item.time);
+
+  const results = [];
+  _.forEach(groupedByTime, (values, key) => {
+
+    const obj = {
+      time: key,
+    };
+
+    values.forEach(value => {
+      const { sensorId } = value;
+      obj[truncateSensor(sensorId)] = value[type] || 0;
+    });
+
+    // we add the missing keys
+    keys.forEach(sensorId => {
+      if (!obj[sensorId]) {
+        obj[sensorId] = 0;
+      }
+    })
+
+    results.push(obj)
+  });
+
+  return {
+    keys,
+    items: results,
+  };
+}
+
+function truncateSensor(sensorId) {
+  return _.truncate(sensorId, { length: 10 });
 }
