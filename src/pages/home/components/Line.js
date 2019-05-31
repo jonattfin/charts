@@ -7,7 +7,7 @@ const commonProperties = {
   enableSlices: 'x',
 };
 
-export default ({ data, axisLeft, axisBottom, useLogScale = false, skipLogScale = false }) => {
+export default ({ data, axisLeft, axisBottom, useLogScale = false, skipLogScale = true }) => {
 
   let optionalParams = {};
   if (useLogScale && !skipLogScale) {
