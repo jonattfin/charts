@@ -1,7 +1,3 @@
-Deployed on heroku: https://vizcharts.herokuapp.com/ [btw: you need to wait a bit until the container is started.]
-
-
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
