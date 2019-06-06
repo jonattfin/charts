@@ -1319,6 +1319,33 @@
     d3-time-format "^2.1.3"
     lodash "^4.17.11"
 
+"@nivo/scales@0.58.0":
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/@nivo/scales/-/scales-0.58.0.tgz#93ea7fff4eab4e97a306fc338b66f30d81e2004d"
+  integrity sha512-pzGO5ppPfLx/KBhfkRmzX8HxM0/6+Sg/sLqL/Fo7iOGL0gc4jc4vw2m1tAujPslzk/ckmcB7x9X54iTQ5agr6A==
+  dependencies:
+    d3-scale "^3.0.0"
+    d3-time-format "^2.1.3"
+    lodash "^4.17.11"
+
+"@nivo/scatterplot@^0.58.0":
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/@nivo/scatterplot/-/scatterplot-0.58.0.tgz#c436c7d9a69413bbb3d25d5032ec8e5db9ee5a06"
+  integrity sha512-4qzMh8i0vInWFeWYfRZqVSFk0McscVqw8GCwDIUHMSPE95YCZQCLPVShcU+xvFR/NqSBPo9pcPhYQnrUV7008w==
+  dependencies:
+    "@nivo/axes" "0.58.0"
+    "@nivo/colors" "0.58.0"
+    "@nivo/core" "0.58.0"
+    "@nivo/legends" "0.58.0"
+    "@nivo/scales" "0.58.0"
+    "@nivo/tooltip" "0.58.0"
+    "@nivo/voronoi" "0.58.0"
+    d3-scale "^3.0.0"
+    d3-shape "^1.3.5"
+    lodash "^4.17.11"
+    react-motion "^0.5.2"
+    recompose "^0.30.0"
+
 "@nivo/sunburst@^0.57.0":
   version "0.57.0"
   resolved "https://registry.yarnpkg.com/@nivo/sunburst/-/sunburst-0.57.0.tgz#08bff1ab1a0bee210be30a7f92f3fdfc92d5b74e"
@@ -1357,6 +1384,16 @@
   integrity sha512-7Ym1fOK11N8HtNKrthTsjxTgQN0O1rhTtu8iQEHPzLdfToASgSI6TlK6OTCvmZ8TFM22jTipQ5aSuTrW1AfhtA==
   dependencies:
     "@nivo/core" "0.57.0"
+    d3-delaunay "^4.1.5"
+    d3-scale "^3.0.0"
+    recompose "^0.30.0"
+
+"@nivo/voronoi@0.58.0":
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/@nivo/voronoi/-/voronoi-0.58.0.tgz#9b018b3924fbe524f7424c591ad8069de2f672c5"
+  integrity sha512-8jsTPnUk9DN/ghyYwZ/52GOwKXTm5x2/TNNKKm8Qu0ZuOYg6wVWq1TV1VFPk+CpGkw05++gEDKzHJkltN3rztg==
+  dependencies:
+    "@nivo/core" "0.58.0"
     d3-delaunay "^4.1.5"
     d3-scale "^3.0.0"
     recompose "^0.30.0"
