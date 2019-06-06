@@ -107,9 +107,9 @@ export default class App extends React.Component {
         <div className={styles.sunburst_screen}>
           <Sunburst data={adapters.toSunburstFormat(data)} />
         </div>
-        <div className={styles.scatterplot_screen}>
-          {/* <ScatterPlot /> */}
-        </div>
+        {/* <div className={styles.scatterplot_screen}>
+          <ScatterPlot />
+        </div> */}
       </div>
     )
   }

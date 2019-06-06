@@ -36,7 +36,7 @@
     .pie_screen {
         display: flex;
 
-        height: 100vh;
+        height: 60vh;
         background-color: $blue1;
         border-bottom: 1px solid $gray1;
     }
@@ -44,7 +44,7 @@
     .line_screen {
         display: flex;
 
-        height: 100vh;
+        height: 60vh;
         padding: 2vh 1vw;
         background-color: $white;
         border-bottom: 1px solid $gray1;
@@ -64,14 +64,14 @@
 
     .bar_screen {
         display: flex;
-        height: 100vh;
+        height: 60vh;
         background-color: $turquoise1;
         border-bottom: 1px solid $gray1;
     }
 
     .sunburst_screen {
         display: flex;
-        height: 100vh;
+        height: 60vh;
         background-color: $blue1;
     }
 
@@ -83,7 +83,7 @@
 
     .heatmap_screen {
         display: flex;
-        height: 100vh;
+        height: 60vh;
         border-bottom: 1px solid $gray1;
     }
 
