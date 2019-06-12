@@ -80,7 +80,7 @@ export default class App extends React.Component {
           <Map data={adapters.toMapFormat(data)} originalData={data} />
         </div>
         {
-          adapters.dustTypes.map(type => (
+          adapters.mainTypes.map(type => (
             <div key={`dust_${type}`} className={styles.line_screen}>
               <Line {...adapters.toLineFormat(data, type, `${type} µg/m3`)} />
             </div>
@@ -95,12 +95,12 @@ export default class App extends React.Component {
           <Bar data={adapters.toBarFormat(data)}></Bar>
         </div>
         <div className={styles.heatmap_screen}>
-          {adapters.dustTypes.map(type => (
+          {adapters.mainTypes.map(type => (
             <HeatMap data={adapters.toHeatmapFormat(data, type)} />
           ))}
         </div>
         <div className={styles.pie_screen}>
-          {adapters.dustTypes.map(type => (
+          {adapters.mainTypes.map(type => (
             <Pie key={`pie_${type}`} data={adapters.toPieFormat(data, type)} />
           ))}
         </div>

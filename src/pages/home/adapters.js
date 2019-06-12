@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { getLimits } from './limits';
 
-export const dustTypes = ['pm10', 'pm25'];
+export const mainTypes = ['pm10', 'pm25', 'noise'];
 export const otherTypes = ['temperature', 'humidity'];
 
 export function toSunburstFormat(data) {
@@ -16,7 +16,7 @@ export function toSunburstFormat(data) {
 
   _.forEach(groupedByCity, (values, key) => {
     const parents = [];
-    dustTypes.forEach(type => {
+    mainTypes.forEach(type => {
       const children = [];
 
       const limits = getLimits(type);
@@ -79,7 +79,7 @@ export function toLineFormat(data, type, legend) {
     }
 
     const obj = {
-      id: key,
+      id: _.truncate(key, { length: 20 }),
       data: newData,
       ...lineObj
     };
@@ -109,7 +109,7 @@ export function toPieFormat(data, type) {
 }
 
 export function toBarFormat(data) {
-  const keys = [...dustTypes, ...otherTypes];
+  const keys = [...mainTypes, ...otherTypes];
   const items = getData();
 
   return { keys, items };
