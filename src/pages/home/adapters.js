@@ -115,7 +115,7 @@ export function toBarFormat(data) {
   return { keys, items };
 
   function getData() {
-    const filteredData = _.take(_.orderBy(data, ['pm10'], ['desc']), 15);
+    const filteredData = _.take(_.orderBy(data.filter(item => item.pm10 !== undefined), ['pm10'], ['desc']), 15);
 
     return filteredData.map((item) => {
 
