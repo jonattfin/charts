@@ -9,7 +9,7 @@
     "@nivo/bump": "^0.59.0",
     "@nivo/geo": "^0.59.0",
     "@nivo/heatmap": "^0.59.0",
-    "@nivo/line": "^0.59.1",
+    "@nivo/line": "^0.59.0",
     "@nivo/pie": "^0.59.0",
     "@nivo/scatterplot": "^0.59.0",
     "@nivo/sunburst": "^0.59.0",
