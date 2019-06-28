@@ -1240,7 +1240,7 @@
     lodash "^4.17.11"
     recompose "^0.30.0"
 
-"@nivo/line@^0.59.1":
+"@nivo/line@^0.59.0":
   version "0.59.0"
   resolved "https://registry.yarnpkg.com/@nivo/line/-/line-0.59.0.tgz#c85c58a6dbbffe8b11d1a4f19170982a45ae517e"
   integrity sha512-L8N2IT+AJESsHMC97t3ApSlpVTzJtup8xmT2SYCARRo4Lb8NgNKulHxg/3AseKu4qcZbBSbH2pgbvUsWY717sg==
