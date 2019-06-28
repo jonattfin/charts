@@ -46,7 +46,27 @@ export function toMapFormat(data) {
       const { sensorId, position, pm25, pm10, source } = item;
       return { sensorId, position, pm25, pm10, source }
     });
+}
 
+export function toBumpFormat(data, type = 'pm10') {
+  const groupedBySensorId = _.groupBy(data, item => item.sensorId);
+
+  const results = []
+  _.forEach(groupedBySensorId, (values, key) => {
+
+    const obj = {
+      id: _.truncate(key, { length: 20 }),
+      data: [],
+    };
+
+    values.forEach(item => {
+      obj.data.push({ x: item.time, y: item[type] });
+    })
+
+    results.push(obj);
+  })
+
+  return results;
 }
 
 export function toLineFormat(data, type, legend) {

@@ -5,7 +5,7 @@ import {
   Intent,
 } from "@blueprintjs/core";
 
-import { Pie, Line, Map, Bar, Sunburst, HeatMap } from './components';
+import { Pie, Line, Map, Bar, Sunburst, HeatMap, Bump } from './components';
 
 import api from '../../api';
 import * as adapters from './adapters';
@@ -91,6 +91,9 @@ export default class App extends React.Component {
             <Line key={`other_${type}`} {...adapters.toLineFormat(data, type, type)} />
           ))}
         </div>
+        <div className={styles.bump_screen}>
+          <Bump data={adapters.toBumpFormat(data)} />
+        </div>
         <div key={`dust_bar`} className={styles.bar_screen}>
           <Bar data={adapters.toBarFormat(data)}></Bar>
         </div>
@@ -107,9 +110,7 @@ export default class App extends React.Component {
         <div className={styles.sunburst_screen}>
           <Sunburst data={adapters.toSunburstFormat(data)} />
         </div>
-        {/* <div className={styles.scatterplot_screen}>
-          <ScatterPlot />
-        </div> */}
+
       </div>
     )
   }
