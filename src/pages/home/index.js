@@ -91,6 +91,13 @@ export default class App extends React.Component {
             <Line key={`other_${type}`} {...adapters.toLineFormat(data, type, type)} />
           ))}
         </div>
+        {
+          ['noise'].map(type => (
+            <div key={`dust_${type}`} className={styles.line_screen}>
+              <Line {...adapters.toLineFormat(data, type, `${type} units`)} />
+            </div>
+          ))
+        }
         <div className={styles.bump_screen}>
           <Bump data={adapters.toBumpFormat(data)} />
         </div>

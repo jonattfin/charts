@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { getLimits } from './limits';
 
-export const mainTypes = ['pm10', 'pm25', 'noise'];
+export const mainTypes = ['pm10', 'pm25'];
 export const otherTypes = ['temperature', 'humidity'];
 
 export function toSunburstFormat(data) {
